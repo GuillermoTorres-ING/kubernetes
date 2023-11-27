@@ -1,0 +1,49 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-app-1-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-1
+  template:
+    metadata:
+      labels:
+        app: app-1
+    spec:
+      containers:
+        - name: app-1-container
+          image: guillermotorres/app-1:latest
+          ports:
+            - containerPort: 2000
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-app-2-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-2
+  template:
+    metadata:
+      labels:
+        app: app-2
+    spec:
+      containers:
+        - name: app-2-container
+          image: guillermotorres/app-2:latest
+          ports:
+            - containerPort: 2001
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
